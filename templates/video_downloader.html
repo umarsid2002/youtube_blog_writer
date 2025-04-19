@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Login</title>
+</head>
+<body class="bg-gray-100 font-sans antialised">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 text-white flex justify-between">
+        <div>
+            <h1 class="text-3xl font-bold">AI Blog Generator</h1>
+        </div>
+        <div>
+            <a class="text-white hover:underline mx-4" href="#">Welcome {{user.username}}</a>
+            <a class="text-white hover:underline mx-4" href="/blog-list">Saved Blog Posts</a>
+            <a class="text-white hover:underline mx-4" href="/youtube-downloader">YouTube Downloader</a>
+            <a class="text-white hover:underline" href="logout">Logout</a>
+        </div>
+        </nav>
+
+    <div class="flex items-center justify-center h-screen">
+        <div class="bg-white p-8 shadow-md rounded-lg max-w-xl w-full">
+
+            <!-- Login Form -->
+            <form method='POST' class="space-y-4">
+                {% csrf_token %}
+
+                {% if error_message %}
+                    <div align="center" style="color: red;">
+                        <h2>Error</h2>
+                    </div>
+                {% endif %}
+
+                <h2 class="text-xl font-semibold">YouTube Video Downloader</h2>
+                <div>
+                    <input type="text" id="video-downloader" name="video-downloader" placeholder="Enter YouTube Video Url" class="w-full p-2 border rounded">
+                </div>
+
+                <button onClick="startDownload()" type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-800">Download Video</button>
+            </form>
+
+            <div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="px-4">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
